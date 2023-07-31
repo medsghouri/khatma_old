@@ -1,0 +1,75 @@
+
+<html>
+    <head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+        <title>Reel Time</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Martian+Mono:wght@500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+        <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+        <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@600&display=swap" rel="stylesheet">
+
+        <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Noto+Naskh+Arabic:wght@600&family=Reem+Kufi:wght@400;600&display=swap" rel="stylesheet">
+    </head>
+    <body onload="pbo()">
+          <div class="container">
+              <h1> خَتمَة البِر بالوَالِدَين </h1>
+            <img id="img" src="/android-chrome-512x512.png">
+            
+            <label id="h1" class="child float-left-child">
+                <input id="khatmaNo" hidden="true" ></input>  
+                431 الختمة رقم
+            </label>
+                
+
+            <h2> مابين يوم السبت 29/07/2023 </h2>
+            <h2> االى يوم الخميس 03/08/2023  </h2>
+            <div>
+                <!-- <button class="dropbtn" style="width:15%"> 
+                    <i class="fa fa-times-circle-o" ></i>
+                </button> -->
+                <select name="status" id="status" class="selectpicker" hidden="true" >
+                    <option value=""</option>
+                    <option value="true" style="color:#224823">&#xf00c</option>
+                    <option value="false" style="color:#73000c">&#xf00d</option>
+                </select>
+                
+                <input style="width:75%"type="text" id="search"  placeholder="..بحث " title="Type in a name"> 
+            </div>
+            
+            
+            
+            <table id="userTable" class="table">
+                <thead>
+                     <!-- <th>Name
+                        <button type="button" class="btn btn-primary " onclick="UpdateNameUp()"> 
+                            <i class="fa fa-arrow-up">
+                            </i> 
+                        </button>
+                        <button type="button" class="btn btn-primary " onclick="UpdateNameDown()">      <i class="fa fa-arrow-down"> 
+                            </i> 
+                        </button>
+                    </th> 
+                    <th>Status</th> --> 
+                </thead>   
+                <tbody id="userTbody"> </tbody>
+            </table>
+            <ul id="khatma">
+            </ul>
+        </div>
+        <script src="index.js" type="module" ></script>
+        <script src="pbo"> </script>
+    </body>
+</html> 
+
