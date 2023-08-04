@@ -128,25 +128,25 @@ function pboForEachRow(currentUser){
 // ---------------------------------------------------------------------------------------------
 // --- Udate Status in DB ----------------------------------------------------------------------
 function updateStatusInDB(userValue){
-    
-    // Popup to confirm
-    let text = " تأكيد قراءة الحزب " ;
-    if (confirm(text) == true) {
-        text = "You pressed OK!";
-        // Update Status in DB
-        var userInDB = "khatma/"+431+"/user/" + userValue.no    
-        var userRef = ref(database,userInDB);
+    setTimeout(function() {
+        // Popup to confirm
+        let text = " تأكيد قراءة الحزب " ;
+        if (confirm(text) == true) {
+            text = "You pressed OK!";
+            // Update Status in DB
+            var userInDB = "khatma/"+431+"/user/" + userValue.no    
+            var userRef = ref(database,userInDB);
       
-        if (userValue.status == ''){
-            update(userRef, {'status': 'X'}) 
-        }
-        else {
-            update(userRef, {'status': ''})     
-        } 
+            if (userValue.status == ''){
+                update(userRef, {'status': 'X'}) 
+            }
+            else {
+                update(userRef, {'status': ''})     
+            } 
         } else {
             text = "You canceled!";
         }
-
+    }, '200');
 }
 
 
