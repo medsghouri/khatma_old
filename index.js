@@ -5,17 +5,21 @@ const appSettings = {
     databaseURL: "https://read-the-quran-default-rtdb.europe-west1.firebasedatabase.app/"
 }
 
-const app = initializeApp(appSettings)
-const database = getDatabase(app)
+    const app = initializeApp(appSettings)
+
 var khatmaNoEl = document.getElementById("khatmaNo").value
-
-var khatmaPathInDB = "khatma/" + "431" +"/user"
-const khatmaInDB = ref(database, khatmaPathInDB)
-
+var khatmaPathInDB
+var KhatmaRef
 const userTableEl = document.getElementById("userTable")
 var userTbodyEl = document.getElementById('userTbody');
 
 var ARRAY ;
+
+// Main
+getKhatmaRef()
+selectFromDB()
+
+
 // ---------------------------------------------------------------------------------------------
 //      Functions
 // ---------------------------------------------------------------------------------------------
@@ -24,8 +28,27 @@ var ARRAY ;
 // ---------------------------------------------------------------------------------------------
 //      PBO
 // ---------------------------------------------------------------------------------------------
-// --- get all values from DB, Whenever any change occures in DB -------------------------------
-onValue(khatmaInDB, function(snapshot) {
+// --- get all values from DB ------------------------------------------------------------------
+
+function getKhatmaRef(){
+
+    const database = getDatabase(app)
+    
+    console.log(khatmaNoEl.value)
+    if (khatmaNoEl == false){
+        khatmaPathInDB = "khatma/" + 431 +"/user" // 04
+    } else{
+
+        khatmaPathInDB = "khatma/" + khatmaNoEl.value +"/user" // 04
+    }
+
+    KhatmaRef = ref(database, khatmaPathInDB)
+    console.log(KhatmaRef)
+}
+
+function selectFromDB(){
+
+ onValue(KhatmaRef, function(snapshot) {
     let userArray = Object.values(snapshot.val())   // Change JSON format to Array format
     ARRAY = Object.values(snapshot.val()) 
     clearUserTableEl()
@@ -41,9 +64,10 @@ onValue(khatmaInDB, function(snapshot) {
         // onFilterStatus()
     }
     
+})   
+    
+}
 
-
-})
 
 //--
 
@@ -64,27 +88,37 @@ function addUserToTableEl(userValue) {
     // trow.appendChild(td1);
     
     var trowEl = document.createElement('tr');
+    var tBtnEl = document.createElement('button') /////
     var tdRowEl = document.createElement('td');
     
     var iLeftEl = document.createElement('i')
     var divRightEl = document.createElement('div')
     
     // tdNameEl.innerHTML = userValue.name;
-    tdRowEl.id="tdRow"+userValue.no
     
+    tBtnEl.id="tBtn"+userValue.no////////////
+    tdRowEl.id="tdRow"+userValue.no
     iLeftEl.id="iLeft"+userValue.no
+    
     divRightEl.innerHTML = ` الحزب ` + userValue.no+ ` - ` + userValue.name  ;
     divRightEl.style.cssFloat = "right"
+    
     
     tdRowEl.appendChild(iLeftEl)
     tdRowEl.appendChild(divRightEl)
     trowEl.appendChild(tdRowEl); 
+    trowEl.appendChild(tBtnEl) /////////////
     userTbodyEl.appendChild(trowEl);
     
+    tBtnEl.addEventListener("click", function(){  /////
+        location.href = "./hizb.html?no=" + userValue.no ////////
+    })/////////
         
     //--------------------- Click on Name in Table --------------
-    tdRowEl.addEventListener("click", function() {
-        updateStatusInDB(userValue)
+    
+    tdRowEl.addEventListener("click" , function() {
+        
+         updateStatusInDB(userValue)
     })
 }
 
@@ -109,7 +143,7 @@ function pboForEachRow(currentUser){
     else{ // Red
         // -- Change color of row --
         document.getElementById("tdRow"+currentUser.no).style.backgroundColor = 'lightred' 
-        document.getElementById("tdRow"+currentUser.no).style.borderColor = '#73000c' //Darkgreen
+        document.getElementById("tdRow"+currentUser.no).style.borderColor = '#73000c' //Darkred
         
         // -- change icon of row
         iLeftEl.className = "fa fa-times"
@@ -128,25 +162,35 @@ function pboForEachRow(currentUser){
 // ---------------------------------------------------------------------------------------------
 // --- Udate Status in DB ----------------------------------------------------------------------
 function updateStatusInDB(userValue){
-    setTimeout(function() {
-        // Popup to confirm
-        let text = " تأكيد قراءة الحزب " ;
-        if (confirm(text) == true) {
-            text = "You pressed OK!";
-            // Update Status in DB
-            var userInDB = "khatma/"+431+"/user/" + userValue.no    
-            var userRef = ref(database,userInDB);
+    
+          setTimeout(function() {
+                // Popup to confirm
+    let text = " تأكيد قراءة الحزب " ;
+    if (confirm(text) == true) {
+        text = "You pressed OK!";
+        // Update Status in DB
+       // var userInDB = "khatma/"+khatmaNoEl+"/user/" + userValue.no    // 04
+        if (khatmaNoEl == true){
+            var userInDB = "khatma/"+khatmaNoEl+"/user/" + userValue.no    // 04
+        } else{
+            var userInDB = "khatma/"+431+"/user/" + userValue.no    // 04
+        }
+        
+        var userRef = ref(database,userInDB);
       
-            if (userValue.status == ''){
-                update(userRef, {'status': 'X'}) 
-            }
-            else {
-                update(userRef, {'status': ''})     
-            } 
+        if (userValue.status == ''){
+            update(userRef, {'status': 'X'}) 
+        }
+        else {
+            update(userRef, {'status': ''})     
+        } 
         } else {
             text = "You canceled!";
         }
     }, '200');
+        
+
+
 }
 
 
@@ -164,6 +208,14 @@ var statusEl = document.getElementById("status");
 statusEl.addEventListener("change", function() {
     onFilter()
 })
+
+// --- on Searching ----------------------------------------------------------------------------
+var khatmaNoEl = document.getElementById("khatmaNo");
+khatmaNoEl.addEventListener("change", function() {
+    getKhatmaRef()
+    selectFromDB()
+})
+
 
 
 // --- Filter users based on the search --------------------------------------------------------
