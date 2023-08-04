@@ -54,7 +54,7 @@ input {
     border: 0;
     border-radius: 10px;
     text-align: center;
-    width: 15%;
+    width: 25%;
 }
 
 input[type="text"]::placeholder {
