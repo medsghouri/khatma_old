@@ -126,6 +126,11 @@ td {
     
 }
 
+td:hover {
+    background-color: #b5556b;
+    cursor: pointer;
+}
+
 
 img{
     width: 150px;
