@@ -96,7 +96,7 @@ function addUserToTableEl(userValue) {
     
     // tdNameEl.innerHTML = userValue.name;
     
-    tBtnEl.id="tBtn"+userValue.no////////////
+    // tBtnEl.id="tBtn"+userValue.no////////////
     tdRowEl.id="tdRow"+userValue.no
     iLeftEl.id="iLeft"+userValue.no
     
@@ -107,12 +107,12 @@ function addUserToTableEl(userValue) {
     tdRowEl.appendChild(iLeftEl)
     tdRowEl.appendChild(divRightEl)
     trowEl.appendChild(tdRowEl); 
-    trowEl.appendChild(tBtnEl) /////////////
+    // trowEl.appendChild(tBtnEl) /////////////
     userTbodyEl.appendChild(trowEl);
     
-    tBtnEl.addEventListener("click", function(){  /////
-        location.href = "./hizb.html?no=" + userValue.no ////////
-    })/////////
+    // tBtnEl.addEventListener("click", function(){  /////
+    //     location.href = "./hizb.html?no=" + userValue.no ////////
+    // })/////////
         
     //--------------------- Click on Name in Table --------------
     
