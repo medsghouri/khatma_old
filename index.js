@@ -6,7 +6,7 @@ const appSettings = {
 }
 
     const app = initializeApp(appSettings)
-
+    const database = getDatabase(app)
 var khatmaNoEl = document.getElementById("khatmaNo").value
 var khatmaPathInDB
 var KhatmaRef
@@ -32,7 +32,7 @@ selectFromDB()
 
 function getKhatmaRef(){
 
-    const database = getDatabase(app)
+
     
     console.log(khatmaNoEl.value)
     if (khatmaNoEl == false){
