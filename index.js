@@ -36,7 +36,7 @@ function getKhatmaRef(){
     
     console.log(khatmaNoEl.value)
     if (khatmaNoEl == false){
-        khatmaPathInDB = "khatma/" + 441 +"/user" // 04
+        khatmaPathInDB = "khatma/" + 442 +"/user" // 04
     } else{
 
         khatmaPathInDB = "khatma/" + khatmaNoEl.value +"/user" // 04
@@ -173,7 +173,7 @@ function updateStatusInDB(userValue){
         if (khatmaNoEl == true){
             var userInDB = "khatma/"+khatmaNoEl+"/user/" + userValue.no    // 04
         } else{
-            var userInDB = "khatma/"+441+"/user/" + userValue.no    // 04
+            var userInDB = "khatma/"+442+"/user/" + userValue.no    // 04
         }
         
         var userRef = ref(database,userInDB);
